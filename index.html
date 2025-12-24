@@ -14,8 +14,21 @@
 
 
   <style>
+    /* // tag selector */
     body {
       font-family: "Plus Jakarta Sans", sans-serif;
+    }
+
+    p {
+      /* // rules */
+    }
+
+    .box {
+      /* rules */
+    }
+
+    #email {
+      /* rules */
     }
 
     .container {
@@ -85,16 +98,16 @@
     <!-- input email -->
     <div class="input-group">
       <label for="">Email Address</label>
-      <input type="email" placeholder="name@example.com">
+      <input id="email" type="email" placeholder="name@example.com">
     </div>
 
     <!-- input password -->
     <div class="input-group">
       <label for="">Password</label>
-      <input type="password" placeholder="enter password">
+      <input id="password" type="password" placeholder="enter password">
     </div>
 
-    <button class="btn-login">Log In</button>
+    <button class="btn-login" onclick="login()">Log In</button>
 
     <p>
       Don't have an account? <a href="./register.html">Sign up</a>
@@ -102,6 +115,34 @@
 
   </div>
 
+  <script>
+
+    function login() {
+      // ambil elemen email & password dari html
+      let inEmail = document.getElementById('email')
+      let inPassword = document.getElementById('password')
+
+      // ambil data dari local storage
+      let userDb = getFromStorage()
+
+      // apakah email & passwordnya sama dengan yang di local storage
+      if (inEmail.value == userDb.email) {
+        if(inPassword.value == userDb.password) {
+          alert("Login Berhasil")
+        } else {
+          alert("Login Gagal")
+        }
+      } else {
+        alert("Email tidak ditemukan")
+      }
+    }
+
+    function getFromStorage() {
+      let userInStorage = localStorage.getItem('user')
+      return JSON.parse(userInStorage)
+    }
+
+  </script>
 </body>
 
 </html>
